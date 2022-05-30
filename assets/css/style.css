@@ -1,0 +1,78 @@
+@charset "UTF-8";
+* {
+  font-family: '微軟正黑體';
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: lightcyan;
+}
+
+.information__container {
+  background-color: white;
+}
+
+.title__container {
+  text-align: center;
+}
+
+.select__container {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: solid 1px black;
+  width: 60px;
+  text-align: center;
+}
+
+.tableDaily__container {
+  margin-top: 10px;
+}
+
+.tableHeading {
+  background-color: lightblue;
+}
+
+.tableCinema {
+  height: 100px;
+}
+
+.film__container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  left: 90px;
+  width: 80%;
+}
+
+.film__container .film {
+  position: absolute;
+  background-color: lightpink;
+  margin: 0;
+  padding: 0;
+  top: 65px;
+  height: 80px;
+  overflow: hidden;
+  font-size: 0.5rem;
+}
+
+.film__container p, .film__container span {
+  margin: 0;
+  padding: 0;
+  font-size: 0.5rem;
+}
+/*# sourceMappingURL=style.css.map */
