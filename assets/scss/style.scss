@@ -17,6 +17,11 @@ body{
 	background-color: white;
 	padding: 30px;
 	overflow: hidden;
+	width: 1000px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 //標題
