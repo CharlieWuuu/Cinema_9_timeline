@@ -1,18 +1,22 @@
 *{
 	font-family: '微軟正黑體';
+	margin:0px;
+	padding:0px;
 }
 
 body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: lightcyan;
+	background-color: rgb(205, 236, 232);
 }
 
 //資訊卡
 
 .information__container{
 	background-color: white;
+	padding: 30px;
+	overflow: hidden;
 }
 
 //標題
@@ -24,30 +28,40 @@ body{
 //下拉選單
 .select__container{
 	text-align: center;
+	select{
+		margin: 10px 30px;
+	}
 }
 
 //時間表
-
 table{
 	border-collapse: collapse;
 }
 
 td{
-	border: solid 1px black;
+	box-shadow: inset 0.1px 0 0.5px 0.5px black;
 	width: 60px;
 	text-align: center;
 }
 
+#block{
+	box-shadow: inset 0.1px 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
+}
+
 .tableDaily__container{
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 .tableHeading{
-	background-color: lightblue;
+	background-color: rgb(211, 244, 238);
 }
 
 .tableCinema{
 	height: 100px;
+}
+
+#cinema{
+	background-color: rgb(235, 249, 247);
 }
 
 .film__container{
@@ -59,19 +73,24 @@ td{
 	width: 80%;
 	.film {
 		position: absolute;
-		background-color: lightpink;
+		background-color: rgb(253, 247, 220);
 		margin: 0;
 		padding: 0;
 		top: 65px;
-		height: 80px;
+		height: 70px;
 		overflow:hidden;
 		font-size: 0.5rem;
-
-
+		box-shadow: inset 0.1px 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
 	}
-	p,span{
-		margin: 0;
-		padding:0;
+	p{
+		margin: 10px 0 0 2px ;
+		padding: 0;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+	span{
+		margin-left: 2px;
+		padding: 0;
 		font-size: 0.5rem;
 	}
 }

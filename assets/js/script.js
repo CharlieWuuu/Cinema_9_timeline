@@ -2703,20 +2703,20 @@ var tableCinema_html = `
 <table class="tableCinema">
   <tr>
     <td id="cinema">{{filmData.list.cinema}}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
   </tr>
 </table>
 </div>`;
@@ -2724,7 +2724,7 @@ var tableCinema_html = `
 var filmContainer_html = `
 <div class="film__container" id="{{filmData.list.fid}}">
   <div class="film" id={{filmData.list.fid}}
-  style="transform: translate({{filmData.list.left}}px, -155px);
+  style="transform: translate({{filmData.list.left}}px, -150px);
   width: {{filmData.list.long}}px">
     <p id="film__name">{{filmData.list.name}}</p>
     <span id="film__time">{{filmData.list.startTime}}-{{filmData.list.endTime}}</span>
