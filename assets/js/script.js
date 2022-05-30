@@ -2785,7 +2785,18 @@ function changeDate(event) {
     all_daily_div[i].style.display = 'none';
   }
 
-  dateArray = ['D08', 'D09', 'D10', 'D11'];
+  dateArray = [
+    'D08',
+    'D09',
+    'D10',
+    'D11',
+    'D12',
+    'D13',
+    'D14',
+    'D15',
+    'D16',
+    'D17',
+  ];
   startIndex = dateArray.indexOf(inputStartValue);
   console.log(startIndex);
   endIndex = dateArray.indexOf(inputEndValue);
