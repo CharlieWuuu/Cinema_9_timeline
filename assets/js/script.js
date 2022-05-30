@@ -2835,18 +2835,32 @@ function changeCinema(event) {
   }
 
   // 設定 x 為包含選擇的值的 id
-  var x = '[id*=' + inputCinemaValue + ']';
+  var includeValue = '[id*=' + inputCinemaValue + ']';
 
   // 設定 array 為包含選擇的值的全部 id
-  var array = document.querySelectorAll(x);
+  var array = document.querySelectorAll(includeValue);
 
-  if (inputCinemaValue == '') {
-    return;
-  } else {
+  if (inputCinemaValue !== '') {
     for (i = 0; i < array.length; i++) {
       // 利用for迴圈找出每個id，一一block出來
-      console.log(array[i]);
+      // console.log(array[i]);
       array[i].style.display = 'block';
+    }
+  }
+
+  var hideList = ['#D14', '#D15', '#D16', '#D17'];
+  if (inputCinemaValue == 'C01' || inputCinemaValue == 'C03') {
+    for (i = 0; i < hideList.length; i++) {
+      console.log(document.querySelector(hideList[i]));
+      document.querySelector(hideList[i]).style.display = 'none';
+    }
+  } else if (
+    inputCinemaValue == 'C02' ||
+    inputCinemaValue == 'C04' ||
+    inputCinemaValue == 'C0'
+  ) {
+    for (i = 0; i < hideList.length; i++) {
+      document.querySelector(hideList[i]).style.display = 'block';
     }
   }
 }
