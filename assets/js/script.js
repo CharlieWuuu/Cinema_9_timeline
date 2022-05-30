@@ -2823,8 +2823,6 @@ endDate_selector.addEventListener('change', function (event) {
   changeDate(event);
 });
 
-// 練習
-
 const cinema_selector = document.querySelector('#cinema_selector');
 
 function changeCinema(event) {
@@ -2856,17 +2854,3 @@ function changeCinema(event) {
 cinema_selector.addEventListener('change', function (event) {
   changeCinema(event);
 });
-
-// cinemaArray = ['C01', 'C02', 'C03', 'C04'];
-// cinemaIndex = cinemaArray.indexOf(inputCinemaValue);
-// console.log(cinemaIndex);
-// console.log(inputCinemaValue);
-
-// console.log(x);
-// console.log(document.querySelector(x));
-
-// dateArray = ['D08', 'D09', 'D10', 'D11'];
-// for (i = 0; i < dateArray.length; i++) {
-//   console.log(document.querySelector('#' + dateArray[i]));
-//   // document.querySelector('#' + dateArray[i]).style.display = 'block';
-// }
