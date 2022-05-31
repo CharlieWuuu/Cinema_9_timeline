@@ -2820,11 +2820,11 @@ for (var i = 0; i < filmData.list.length; i++) {
 //    3-3. 缺少開始：警告資料有漏
 //    3-4. 開始 <= 結束：顯示範圍內的div
 
-function changeDate(event) {
-  // 設定變數：開始/結束日期選單的div
-  const startDate_selector = document.querySelector('#startDate_selector');
-  const endDate_selector = document.querySelector('#endDate_selector');
+// 設定變數：開始/結束日期選單的div
+const startDate_selector = document.querySelector('#startDate_selector');
+const endDate_selector = document.querySelector('#endDate_selector');
 
+function changeDate(event) {
   // 設定變數：開始/結束日期選單的值
   // 選擇邏輯：開始日期選單的div > 被選到的option > 值
   const inputStartValue =
@@ -2887,25 +2887,24 @@ endDate_selector.addEventListener('change', function (event) {
 
 // 選擇影廳
 // 1. 取得下拉選單中選到的「影廳」的值
-// 2. 隱藏所有資料
-// 3. 顯示選擇到的影廳表格
+// 2. 隱藏所有影廳的容器
+// 3. 顯示每一天的選擇到的影廳表格
 // 4. 表頭也要顯示或隱藏
-//    4-1. 選到MUVIE TITAN、信義9廳的值時，隱藏0414 ~ 0417的表頭
-//    4-2. 其他的值時，顯示0414 ~ 0417的表頭
+//    4-1. 當日期容器內的影廳容器是隱藏狀態，日器容器跟著隱藏
+
+// 設定變數：影廳選單的div
+const cinema_selector = document.querySelector('#cinema_selector');
 
 function changeCinema(event) {
-  // 設定變數：影廳選單的div
-  const cinema_selector = document.querySelector('#cinema_selector');
   // 設定變數：影廳選單的值
-  // 選擇邏輯：影廳選單的div > 被選到的option > 值
+  // 選擇邏輯：影廳選單的div > 被選到的第i個option > 值
   const inputCinemaValue =
     cinema_selector.options[cinema_selector.selectedIndex].value;
-
   // 隱藏所有的資料
-  // 選擇所有日期的容器，「選擇所有（querySelectorAll）」會變成陣列，因此用for迴圈一一隱藏
-  var all_daily_div = document.querySelectorAll('.tableCinema__container');
-  for (i = 0; i < all_daily_div.length; i++) {
-    all_daily_div[i].style.display = 'none';
+  // 選擇所有影廳的容器，「選擇所有（querySelectorAll）」會變成陣列，因此用for迴圈一一隱藏
+  var all_cinema_div = document.querySelectorAll('.tableCinema__container');
+  for (i = 0; i < all_cinema_div.length; i++) {
+    all_cinema_div[i].style.display = 'none';
   }
 
   // 設定變數：包含選擇值的 id
@@ -2924,17 +2923,24 @@ function changeCinema(event) {
   // 並非所有影廳每日皆有上片，當天放映影廳表格會被影藏，表頭也要跟著影藏
   // 其中0414 ~ 0417期間，影廳C01、C03沒有放映
   // 設定#D14 ~ #D17的陣列，在選擇div時使用
-  var hideList = ['#D14', '#D15', '#D16', '#D17'];
-  // 若選到的值為影廳C01或C03，隱藏#D14 ~ #D17的表頭，用for迴圈一一隱藏
-  if (inputCinemaValue == 'C01' || inputCinemaValue == 'C03') {
-    for (i = 0; i < hideList.length; i++) {
-      console.log(document.querySelector(hideList[i]));
-      document.querySelector(hideList[i]).style.display = 'none';
+
+  // 當日期容器內的影廳容器是隱藏狀態，日器容器跟著隱藏
+  var all_daily_div = document.querySelectorAll('.tableDaily__container');
+
+  for (i = 0; i < all_daily_div.length; i++) {
+    var daily_cinema_div = all_daily_div[i].querySelectorAll(
+      '.tableCinema__container',
+    );
+    var count = 0;
+    for (x = 0; x < daily_cinema_div.length; x++) {
+      if (daily_cinema_div[x].style.display == 'none') {
+        count++;
+      }
     }
-    // 若選到其他（影廳C02、影廳C04、全部C0），顯示#D14 ~ #D17的表頭
-  } else {
-    for (i = 0; i < hideList.length; i++) {
-      document.querySelector(hideList[i]).style.display = 'block';
+    if (count == daily_cinema_div.length) {
+      all_daily_div[i].style.display = 'none';
+    } else {
+      all_daily_div[i].style.display = 'block';
     }
   }
 }
