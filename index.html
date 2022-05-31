@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="./assets/js/film.json"></script>
     <title>金馬奇幻影展 場次表</title>
   </head>
   <body>
@@ -42,7 +41,7 @@
           <option value="D17">4月17日 (日)</option>
         </select>
         <select id="cinema_selector">
-          <option value="" disabled selected hidden>請選擇影廳</option>
+          <option value="C0" disabled selected hidden>請選擇影廳</option>
           <option value="C01">MUVIE TITAN</option>
           <option value="C02">信義9廳</option>
           <option value="C03">信義10廳</option>
@@ -52,6 +51,7 @@
       </div>
       <div class="timeline__container"></div>
     </div>
+    <script src="./assets/js/film.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

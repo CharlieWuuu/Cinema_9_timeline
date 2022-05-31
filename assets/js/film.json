@@ -1,4 +1,6 @@
-﻿[
+﻿var filmData = {};
+filmData.name = '影片資訊';
+filmData.list = [
     {
         "did": "D08",
         "date": "4月8日",
