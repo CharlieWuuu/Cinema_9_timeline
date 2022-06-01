@@ -47,8 +47,8 @@ var tableCinema_html = `
 </div>`;
 
 var filmContainer_html = `
-<div class="film__container" id="{{filmData.list.fid}}">
-  <div class="film" id={{filmData.list.fid}}
+<div class="film__container" id="{{filmData.list.full_id}}">
+  <div class="film" id={{filmData.list.full_id}}
   style="transform: translate({{filmData.list.left}}px, -150px);
   width: {{filmData.list.long}}px">
     <p id="film__name">{{filmData.list.name}}</p>
@@ -115,7 +115,7 @@ for (var i = 0; i < filmData.list.length; i++) {
   // 設定變數：本次迴圈的片單html
   var current_filmContainer_html = filmContainer_html
     // html的id變更為「本次迴圈的片單id」，利於後續選擇時指涉；因不止放入一處，使用.replaceAll
-    .replaceAll('{{filmData.list.fid}}', filmData.list[i].fid)
+    .replaceAll('{{filmData.list.full_id}}', filmData.list[i].full_id)
     // html的x軸位置變更為「本次迴圈的left」，以在表格上呈現正確位置
     .replace('{{filmData.list.left}}', filmData.list[i].left)
     // html的width變更為「本次迴圈的long」，以在表格上正確寬度
