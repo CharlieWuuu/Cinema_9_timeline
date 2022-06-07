@@ -1,23 +1,39 @@
+const localData = JSON.parse(localStorage.getItem('片單'))
+  ? JSON.parse(localStorage.getItem('片單'))
+  : [];
+
+// 函式：載入時，顯示已選片單數量
+function showFilmAmount() {
+  if (localData.length == 0) {
+    document.getElementById('film_amount').style.display = 'none';
+  } else {
+    document.getElementById('film_amount').innerText = localData.length;
+    console.log(localData.length);
+  }
+}
+showFilmAmount();
+
 var timeHeading_html = `
 <div class="tableDaily__container" id="{{filmData.list.did}}" >
   <div class="tableHeading__container" id= {{filmData.list.did}}>
     <table class="tableHeading">
     <tr>
-      <td id="date01">{{filmData.list.date}}</td>
-      <td>10:00</td>
-      <td>11:00</td>
-      <td>12:00</td>
-      <td>13:00</td>
-      <td>14:00</td>
-      <td>15:00</td>
-      <td>16:00</td>
-      <td>17:00</td>
-      <td>18:00</td>
-      <td>19:00</td>
-      <td>20:00</td>
-      <td>21:00</td>
-      <td>22:00</td>
-      <td>23:00</td>
+      <td id="date01"><p>{{filmData.list.date}}</p></td>
+      <td id="date02"><p>10:00</p></td>
+      <td id="date02"><p>11:00</p></td>
+      <td id="date02"><p>12:00</p></td>
+      <td id="date02"><p>13:00</p></td>
+      <td id="date02"><p>14:00</p></td>
+      <td id="date02"><p>15:00</p></td>
+      <td id="date02"><p>16:00</p></td>
+      <td id="date02"><p>17:00</p></td>
+      <td id="date02"><p>18:00</p></td>
+      <td id="date02"><p>19:00</p></td>
+      <td id="date02"><p>20:00</p></td>
+      <td id="date02"><p>21:00</p></td>
+      <td id="date02"><p>22:00</p></td>
+      <td id="date02"><p>23:00</p></td>
+      <td id="date03"><p></p></td>
     </tr>
   </table>
   </div>
@@ -27,7 +43,21 @@ var tableCinema_html = `
 <div class="tableCinema__container" id={{filmData.list.cid}}>
 <table class="tableCinema">
   <tr>
-    <td id="cinema">{{filmData.list.cinema}}</td>
+    <td id="cinema"><p id="cinema__name">{{filmData.list.cinema}}</p></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
+    <td id="block"></td>
     <td id="block"></td>
     <td id="block"></td>
     <td id="block"></td>
@@ -48,13 +78,14 @@ var tableCinema_html = `
 
 var filmContainer_html = `
 <div class="film__container" id="{{filmData.list.full_id}}">
-  <div class="film" id={{filmData.list.full_id}}
-  style="transform: translate({{filmData.list.left}}px, -150px);
-  width: {{filmData.list.long}}px">
+  <div class="film" id={{filmData.list.full_id}} title="{{filmData.list.name}}"
+  style="transform: translate({{filmData.list.left}}vw, -150px);
+  width: {{filmData.list.long}}vw">
     <p id="film__name">{{filmData.list.name}}</p>
     <span id="film__time">
       {{filmData.list.startTime}}-{{filmData.list.endTime}}
-    </span>
+    </span></br></br>
+    <span id="{{filmData.list.full_id}}" onclick="chooseFavorite(this.id)">♡加入片單</span>
   </div>
 </div>`;
 
@@ -113,15 +144,17 @@ for (var i = 0; i < filmData.list.length; i++) {
 
   // 顯示所有片單（所有資料都要跑過，所以不用if判斷）
   // 設定變數：本次迴圈的片單html
+  const long = filmData.list[i].long * 0.1;
+  const left = 8 + filmData.list[i].left * 0.1;
   var current_filmContainer_html = filmContainer_html
     // html的id變更為「本次迴圈的片單id」，利於後續選擇時指涉；因不止放入一處，使用.replaceAll
     .replaceAll('{{filmData.list.full_id}}', filmData.list[i].full_id)
     // html的x軸位置變更為「本次迴圈的left」，以在表格上呈現正確位置
-    .replace('{{filmData.list.left}}', filmData.list[i].left)
+    .replace('{{filmData.list.left}}', left)
     // html的width變更為「本次迴圈的long」，以在表格上正確寬度
-    .replace('{{filmData.list.long}}', filmData.list[i].long)
+    .replace('{{filmData.list.long}}', long)
     // 帶入電影名稱文字
-    .replace('{{filmData.list.name}}', filmData.list[i].name)
+    .replaceAll('{{filmData.list.name}}', filmData.list[i].name)
     // 帶入電影開始時間文字
     .replace('{{filmData.list.startTime}}', filmData.list[i].startTime)
     // 帶入電影結束時間文字
@@ -178,6 +211,7 @@ function changeDate(event) {
     'D15',
     'D16',
     'D17',
+    'D18',
   ];
 
   startIndex = dateArray.indexOf(inputStartValue);
@@ -185,14 +219,17 @@ function changeDate(event) {
 
   // 如果「開始」、「結束」日期的值無資料，不執行
   if (inputStartValue == '' && inputEndValue == '') {
-    return;
+    var all_daily_div = document.querySelectorAll('.tableDaily__container');
+    for (i = 0; i < all_daily_div.length; i++) {
+      all_daily_div[i].style.display = 'block';
+    }
     // 如果「開始」日期的值 > 「結束」日期的值，跳出警告視窗
-  } else if (startIndex > endIndex) {
-    alert('開始時間不能比結束時間晚');
-    // 如果未選擇「開始」日期的值，跳出警告視窗
-  } else if (inputStartValue == '') {
+  } else if (inputStartValue == '' && inputEndValue !== '') {
     alert('請選擇開始日期');
     // 如果「開始」日期的值 <= 「結束」日期的值，顯示包含這些日期id的div
+  } else if (inputStartValue !== '' && inputEndValue == '') {
+    let x = startIndex;
+    document.querySelector('#' + dateArray[x]).style.display = 'block';
   } else {
     for (i = startIndex; i <= endIndex; i++) {
       document.querySelector('#' + dateArray[i]).style.display = 'block';
@@ -203,21 +240,16 @@ function changeDate(event) {
 // 改變「開始」日期的值時，執行函式
 startDate_selector.addEventListener('change', function (event) {
   changeDate(event);
-  changeCinema(event);
+  // changeCinema(event);
 });
 
 // 改變「結束」日期的值時，執行函式
 endDate_selector.addEventListener('change', function (event) {
   changeDate(event);
-  changeCinema(event);
+  // changeCinema(event);
 });
 
 // 選擇影廳
-// 1. 取得下拉選單中選到的「影廳」的值
-// 2. 隱藏所有影廳的容器
-// 3. 顯示每一天的選擇到的影廳表格
-// 4. 表頭也要顯示或隱藏
-//    4-1. 當日期容器內的影廳容器是隱藏狀態，日器容器跟著隱藏
 
 // 設定變數：影廳選單的div
 let cinema_selector = document.querySelector('#cinema_selector');
@@ -232,6 +264,8 @@ function changeCinema(event) {
   // 選擇所有影廳的容器，「選擇所有（querySelectorAll）」會變成陣列，因此用for迴圈一一隱藏
   var all_cinema_div = document.querySelectorAll('.tableCinema__container');
   for (i = 0; i < all_cinema_div.length; i++) {
+    // all_cinema_div[i].style.backgroundColor = 'red';
+    // all_cinema_div[i].style.height = '200px';
     all_cinema_div[i].style.display = 'none';
   }
 
@@ -246,6 +280,7 @@ function changeCinema(event) {
     // 利用for迴圈block每個符合條件的id
     for (i = 0; i < array.length; i++) {
       array[i].style.display = 'block';
+      console.log(array[i]);
     }
   }
 
@@ -283,3 +318,62 @@ cinema_selector.addEventListener('change', function (event) {
   changeDate(event);
   changeCinema(event);
 });
+
+// 函式：載入時，顯示已選片單數量
+function showFilmAmount() {
+  if (localData.length == 0) {
+    document.getElementById('film_amount').style.display = 'none';
+  } else {
+    document.getElementById('film_amount').innerText = localData.length;
+  }
+}
+showFilmAmount();
+
+// 函式：載入時，已選片單變色
+function showClicked() {
+  // 變數：載入時，預選的id；預設為空值
+  let chosenId = '';
+  // 檢查：瀏覽器暫存片單(obj)所有資料
+  for (i = 0; i < localData.length; i++) {
+    // 判斷：是否有預選id，有的話欲渲染片單的HTML變色
+    if ((chosenId = localData[i].full_id)) {
+      const clickedHTML = document.querySelector('.film > #' + chosenId);
+      clickedHTML.style.opacity = '0.2';
+    }
+  }
+}
+showClicked();
+
+// 函式：當點擊愛心時，影片加入我的片單
+function chooseFavorite(clickedId) {
+  // 變數：設定(1)檢查片單存在與否的i、(2)片單存在狀態、(3)欲渲染片單的HTML
+  let current_i = -1;
+  let check = '還沒有這部片';
+  const clickedHTML = document.querySelector('.film > #' + clickedId);
+
+  // 檢查：瀏覽器暫存片單(obj)所有資料
+  for (i = 0; i < localData.length; i++) {
+    // 判斷：是否有已點擊的id這部
+    if (clickedId == localData[i].full_id) {
+      current_i = i;
+      check = '已經有這部片';
+      break;
+    }
+  }
+
+  // 判斷：瀏覽器暫存片單(obj)中是否有這部，決定push或刪除一筆瀏覽器暫存片單(obj)的資料
+  if (check == '已經有這部片') {
+    localData.splice(current_i, 1);
+    localStorage.setItem('片單', JSON.stringify(localData));
+    // 渲染：已選片單變黑色
+    clickedHTML.style.opacity = '1';
+  } else if (check == '還沒有這部片') {
+    localData.push({ full_id: clickedId });
+    localStorage.setItem('片單', JSON.stringify(localData));
+    // 渲染：未選片單變色
+    showClicked();
+  }
+
+  // 渲染：顯示已選片單數量
+  showFilmAmount();
+}

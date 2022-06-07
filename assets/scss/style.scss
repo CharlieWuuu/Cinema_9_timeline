@@ -1,101 +1,12 @@
-*{
-	font-family: '微軟正黑體';
-	margin:0px;
-	padding:0px;
-}
+// 消除所有預設
+@import 'base/reset';
 
-body{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgb(205, 236, 232);
-}
+@import 'variable/color';
+// @import 'variable/font';
 
-//資訊卡
+@import 'mixin/mixin';
 
-.information__container{
-	background-color: white;
-	padding: 30px;
-	overflow: hidden;
-	width: 1000px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-//標題
-
-.title__container{
-	text-align: center;
-}
-
-//下拉選單
-.select__container{
-	text-align: center;
-	select{
-		margin: 10px 30px;
-	}
-}
-
-//時間表
-table{
-	border-collapse: collapse;
-}
-
-td{
-	box-shadow: inset 0.1px 0 0.5px 0.5px black;
-	width: 60px;
-	text-align: center;
-}
-
-#block{
-	box-shadow: inset 0.1px 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
-}
-
-.tableDaily__container{
-	margin-top: 30px;
-}
-
-.tableHeading{
-	background-color: rgb(211, 244, 238);
-}
-
-.tableCinema{
-	height: 100px;
-}
-
-#cinema{
-	background-color: rgb(235, 249, 247);
-}
-
-.film__container{
-	position: relative;
-	margin: 0;
-	padding: 0;
-	border: 0px;
-	left: 60px;
-	width: 80%;
-	.film {
-		position: absolute;
-		background-color: rgb(253, 247, 220);
-		margin: 0;
-		padding: 0;
-		top: 65px;
-		height: 70px;
-		overflow:hidden;
-		font-size: 0.5rem;
-		box-shadow: inset 0.1px 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
-	}
-	p{
-		margin: 10px 0 0 2px ;
-		padding: 0;
-		font-size: 0.9rem;
-		font-weight: 700;
-	}
-	span{
-		margin-left: 2px;
-		padding: 0;
-		font-size: 0.5rem;
-	}
-}
+@import 'layout/body';
+@import 'layout/navbar';
+@import 'layout/header';
+@import 'layout/main';
