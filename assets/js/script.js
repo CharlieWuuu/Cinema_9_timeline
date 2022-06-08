@@ -78,14 +78,14 @@ var tableCinema_html = `
 
 var filmContainer_html = `
 <div class="film__container" id="{{filmData.list.full_id}}">
-  <div class="film" id={{filmData.list.full_id}} title="{{filmData.list.name}}"
+  <div class="film" id={{filmData.list.full_id}} title="{{filmData.list.name}} {{filmData.list.startTime}}-{{filmData.list.endTime}}"
   style="transform: translate({{filmData.list.left}}vw, -150px);
   width: {{filmData.list.long}}vw">
     <p id="film__name">{{filmData.list.name}}</p>
-    <span id="film__time">
+    <p id="film__time">
       {{filmData.list.startTime}}-{{filmData.list.endTime}}
-    </span></br></br>
-    <span id="{{filmData.list.full_id}}" onclick="chooseFavorite(this.id)">♡加入片單</span>
+    </p>
+    <p class="film__fav" id="{{filmData.list.full_id}}" onclick="chooseFavorite(this.id)">❤</p>
   </div>
 </div>`;
 
@@ -156,9 +156,9 @@ for (var i = 0; i < filmData.list.length; i++) {
     // 帶入電影名稱文字
     .replaceAll('{{filmData.list.name}}', filmData.list[i].name)
     // 帶入電影開始時間文字
-    .replace('{{filmData.list.startTime}}', filmData.list[i].startTime)
+    .replaceAll('{{filmData.list.startTime}}', filmData.list[i].startTime)
     // 帶入電影結束時間文字
-    .replace('{{filmData.list.endTime}}', filmData.list[i].endTime);
+    .replaceAll('{{filmData.list.endTime}}', filmData.list[i].endTime);
 
   // 設定變數：本次迴圈的影廳id，用來指稱要放入的div是誰，讓片單放入正確容器中
   var currentCinemaId = filmData.list[i].cid;
@@ -338,7 +338,7 @@ function showClicked() {
     // 判斷：是否有預選id，有的話欲渲染片單的HTML變色
     if ((chosenId = localData[i].full_id)) {
       const clickedHTML = document.querySelector('.film > #' + chosenId);
-      clickedHTML.style.opacity = '0.2';
+      clickedHTML.style.color = '#EA5136';
     }
   }
 }
@@ -366,7 +366,7 @@ function chooseFavorite(clickedId) {
     localData.splice(current_i, 1);
     localStorage.setItem('片單', JSON.stringify(localData));
     // 渲染：已選片單變黑色
-    clickedHTML.style.opacity = '1';
+    clickedHTML.style.color = 'rgba(0, 0, 0, 0.2)';
   } else if (check == '還沒有這部片') {
     localData.push({ full_id: clickedId });
     localStorage.setItem('片單', JSON.stringify(localData));

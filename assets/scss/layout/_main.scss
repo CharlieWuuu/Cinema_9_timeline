@@ -1,4 +1,8 @@
 //資訊卡
+main{
+	margin: 70px 0 200px 0;
+}
+
 .information__container{
 	width: 95vw;
 	margin: auto;
@@ -14,10 +18,16 @@
 	text-align: center;
 
 	select{
-		margin: 10px 30px;
-		background-color: $color_main;
+		margin: 0 24px;
+		background-color: rgba(255, 255, 255, 0);
 		padding: 10px;
 		color: $color_secondary_white;
+		border: 1px solid $color_secondary_white;
+		padding: 8px 20px;
+		width: 120px;
+		option{
+			color: $color_secondary_black;
+		}
 	}
 }
 
@@ -89,6 +99,7 @@ td{
 	p{
 		width: 8vw;
 		font-size: 16px;
+		font-weight: 700;
 	}
 }
 
@@ -167,27 +178,27 @@ td{
 		padding: 0;
 		top: 65px;
 		height: 70px;
-		overflow:hidden;
 		font-size: 0.5rem;
-		// box-shadow: inset 0.1px 0 0.5px 0.5px rgba(0, 0, 0, 0.2);
 	}
+
 	p{
-		margin: 10px 0 0 2px ;
+		margin: 3px 0 0 6px ;
 		padding: 0;
 		font-size: 0.9rem;
 		font-weight: 700;
+		line-height: 1;
 		// 省略部分文字
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	span{
-		margin-left: 2px;
-		padding: 0;
-		font-size: 0.5rem;
-		// 省略部分文字
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+
+	#film__name{
+		margin: 10px 0 0 6px;
+	}
+
+	.film__fav{
+		color: rgba(0, 0, 0, 0.2);
+		cursor: pointer;
 	}
 }
