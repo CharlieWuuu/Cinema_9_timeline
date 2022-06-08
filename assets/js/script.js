@@ -5,8 +5,9 @@ const localData = JSON.parse(localStorage.getItem('片單'))
 // 函式：載入時，顯示已選片單數量
 function showFilmAmount() {
   if (localData.length == 0) {
-    document.getElementById('film_amount').style.display = 'none';
+    document.getElementById('film_amount').style.opacity = '0';
   } else {
+    document.getElementById('film_amount').style.opacity = '1';
     document.getElementById('film_amount').innerText = localData.length;
     console.log(localData.length);
   }
@@ -319,16 +320,6 @@ cinema_selector.addEventListener('change', function (event) {
   changeCinema(event);
 });
 
-// 函式：載入時，顯示已選片單數量
-function showFilmAmount() {
-  if (localData.length == 0) {
-    document.getElementById('film_amount').style.display = 'none';
-  } else {
-    document.getElementById('film_amount').innerText = localData.length;
-  }
-}
-showFilmAmount();
-
 // 函式：載入時，已選片單變色
 function showClicked() {
   // 變數：載入時，預選的id；預設為空值
@@ -373,7 +364,7 @@ function chooseFavorite(clickedId) {
     // 渲染：未選片單變色
     showClicked();
   }
-
+  console.log(localData);
   // 渲染：顯示已選片單數量
   showFilmAmount();
 }
