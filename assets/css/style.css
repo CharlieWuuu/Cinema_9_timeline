@@ -165,6 +165,12 @@ body {
   z-index: -10;
 }
 
+.background__line img {
+  width: 100vw;
+  height: 100vh;
+  background-size: s;
+}
+
 .navbar__container {
   position: fixed;
   top: 0px;
@@ -361,7 +367,7 @@ main {
   color: #FFFFFF;
   border: 1px solid #FFFFFF;
   padding: 8px 20px;
-  width: 120px;
+  width: 150px;
 }
 
 .select__container select option {
@@ -579,15 +585,20 @@ td p {
   font-weight: 700;
 }
 
+.footer .footer__upside section .footer__title a {
+  text-decoration: none;
+  color: #D3D6B1;
+}
+
 .footer .footer__upside section span {
   margin-bottom: 1rem;
 }
 
-.footer .footer__upside section .footer__contant {
+.footer .footer__upside section .footer__content {
   color: #FFFFFF;
 }
 
-.footer .footer__upside section .footer__contant a {
+.footer .footer__upside section .footer__content a {
   text-decoration: none;
   color: #FFFFFF;
 }

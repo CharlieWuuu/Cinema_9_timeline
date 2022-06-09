@@ -14,4 +14,9 @@ body{
 	mix-blend-mode: soft-light;
 	opacity: 0.58;
 	z-index: -10;
+	img{
+		width: 100vw;
+		height: 100vh;
+		background-size: s;
+	}
 }
