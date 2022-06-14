@@ -356,7 +356,7 @@ function chooseFavorite(clickedId) {
   if (check == '已經有這部片') {
     localData.splice(current_i, 1);
     localStorage.setItem('片單', JSON.stringify(localData));
-    // 渲染：已選片單變黑色
+    // 渲染：已選片單變回灰色
     clickedHTML.style.color = 'rgba(0, 0, 0, 0.2)';
   } else if (check == '還沒有這部片') {
     localData.push({ full_id: clickedId });
