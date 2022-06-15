@@ -42,10 +42,20 @@ function showFilmAmount() {
 }
 
 $(document).ready(function () {
-  showFilmAmount();
-
-  // (4) 顯示搜尋input
-  document.querySelector('.fa-search').addEventListener('click', function () {
-    $('.nav__button__searchBar').animate({ width: 'toggle' });
+  $.ajax({
+    dataType: 'html',
+    url: './assets/html/nav.html',
+    jsonp: '$callback',
+    success: showHeaderData,
   });
+
+  function showHeaderData(data) {
+    // Use the template
+    $('#navbar').append(data);
+    showFilmAmount();
+    // (4) 顯示搜尋input
+    document.querySelector('.fa-search').addEventListener('click', function () {
+      $('.nav__button__searchBar').animate({ width: 'toggle' });
+    });
+  }
 });
