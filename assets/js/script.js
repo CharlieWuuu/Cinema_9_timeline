@@ -1,18 +1,8 @@
+// (1) 渲染所有片單
+
 const localData = JSON.parse(localStorage.getItem('片單'))
   ? JSON.parse(localStorage.getItem('片單'))
   : [];
-
-// 函式：載入時，顯示已選片單數量
-function showFilmAmount() {
-  if (localData.length == 0) {
-    document.getElementById('film_amount').style.opacity = '0';
-  } else {
-    document.getElementById('film_amount').style.opacity = '1';
-    document.getElementById('film_amount').innerText = localData.length;
-    console.log(localData.length);
-  }
-}
-showFilmAmount();
 
 var timeHeading_html = `
 <div class="tableDaily__container" id="{{filmData.list.did}}" >
@@ -170,15 +160,7 @@ for (var i = 0; i < filmData.list.length; i++) {
   last_cinema = film.cid;
 }
 
-// 選擇日期範圍
-// 1. 取得下拉選單中選到的「開始」、「結束」日期的值
-// 2. 隱藏所有資料
-// 3. 判斷哪種情況可以顯示片單
-//    3-1. 無資料：不執行
-//    3-2. 開始 > 結束：警告資料有誤
-//    3-3. 缺少開始：警告資料有漏
-//    3-4. 開始 <= 結束：顯示範圍內的div
-
+// (2) 選擇日期範圍
 // 設定變數：開始/結束日期選單的div
 const startDate_selector = document.querySelector('#startDate_selector');
 const endDate_selector = document.querySelector('#endDate_selector');
@@ -250,7 +232,7 @@ endDate_selector.addEventListener('change', function (event) {
   // changeCinema(event);
 });
 
-// 選擇影廳
+// (3) 選擇影廳
 
 // 設定變數：影廳選單的div
 let cinema_selector = document.querySelector('#cinema_selector');
@@ -281,7 +263,6 @@ function changeCinema(event) {
     // 利用for迴圈block每個符合條件的id
     for (i = 0; i < array.length; i++) {
       array[i].style.display = 'block';
-      console.log(array[i]);
     }
   }
 
@@ -320,7 +301,7 @@ cinema_selector.addEventListener('change', function (event) {
   changeCinema(event);
 });
 
-// 函式：載入時，已選片單變色
+// (4) 載入時，已選片單變紅色
 function showClicked() {
   // 變數：載入時，預選的id；預設為空值
   let chosenId = '';
@@ -335,7 +316,7 @@ function showClicked() {
 }
 showClicked();
 
-// 函式：當點擊愛心時，影片加入我的片單
+// (5) 當點擊愛心時，影片加入我的片單
 function chooseFavorite(clickedId) {
   // 變數：設定(1)檢查片單存在與否的i、(2)片單存在狀態、(3)欲渲染片單的HTML
   let current_i = -1;
@@ -364,7 +345,11 @@ function chooseFavorite(clickedId) {
     // 渲染：未選片單變色
     showClicked();
   }
-  console.log(localData);
   // 渲染：顯示已選片單數量
-  showFilmAmount();
+  if (localData.length == 0) {
+    document.getElementById('film_amount').style.opacity = '0';
+  } else {
+    document.getElementById('film_amount').style.opacity = '1';
+    document.getElementById('film_amount').innerText = localData.length;
+  }
 }
